@@ -1,0 +1,74 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:focusableInTouchMode="true"
+    android:fillViewport="true"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rpm" />
+
+
+    <TextView
+        android:id="@+id/watts"
+        android:layout_width="wrap_content"
+        android:layout_height="82sp"
+        android:text="0"
+        android:textSize="72sp"
+        android:layout_toLeftOf="@+id/textView15"
+    />
+
+
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/NumberPickerText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W"
+        android:layout_alignBaseline="@+id/watts"
+        android:layout_alignBottom="@+id/watts"
+        android:layout_toRightOf="@+id/watts"
+       />
+
+    <TextView
+        android:id="@+id/rpm"
+        android:layout_width="wrap_content"
+        android:layout_height="82sp"
+        android:textSize="72sp"
+        android:text="0"
+        android:layout_below="@+id/watts"
+        android:layout_toLeftOf="@+id/textView15"
+         />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RPM"
+        android:layout_alignBaseline="@+id/rpm"
+        android:layout_alignBottom="@+id/rpm"
+        android:layout_toLeftOf="@+id/numberPicker"
+        />
+
+
+</RelativeLayout>

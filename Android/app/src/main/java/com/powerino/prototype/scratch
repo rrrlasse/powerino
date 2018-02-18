@@ -1,0 +1,47 @@
+    // returns RPM
+    double cadence(List voltages, List times) {
+        // 8 seconds (5-24 rotations)
+        if (voltages.size() > 512) {
+            double first = 0.;
+            double last = 0.1;
+
+            List v = voltages.subList(voltages.size() - 512, voltages.size());
+            List t = times.subList(voltages.size() - 512, voltages.size());
+
+            double s = 0;
+
+            for (int i = 0; i < 512; i++) {
+                s += (Double) v.get(i);
+            }
+            s = s / 512.;
+
+            int toggles = 0;
+            boolean above = (Double) v.get(0) > s;
+            for (int i = 1; i < 508; i++) {
+                double y = (Double) v.get(i);
+                double y2 = (Double) v.get(i + 1);
+                double y3 = (Double) v.get(i + 2);
+                double y4 = (Double) v.get(i + 3);
+                if ((above && y < s && y2 < s && y3 < s && y4 < s) || (!above && y > s && y2 > s && y3 > s && y4 > s)) {
+                    above = !above;
+                    toggles++;
+
+                    double left = s - (Double) v.get(i - 1);
+                    double right = y - s;
+                    last = i + left / right;
+                    if (toggles == 1) {
+                        first = last;
+                    }
+                }
+            }
+            int slot2 = (Integer) t.get(511) - (Integer) t.get(0);
+
+            // time per slot in seconds
+            double slot = (double) slot2 / 512. / 1000.;
+
+            double periods_duration = (last - first) * slot;
+            double period = (toggles - 1) / 2. / periods_duration;
+            return 60. / period;
+        }
+        return 0;
+    }

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/space"
+        android:gravity="right"
+        android:text="0:00:00"
+        android:textSize="44sp" />
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/space"
+        android:layout_below="@+id/textView_trip"
+        android:text="trip time" />
+
+
+
+    <TextView
+        android:id="@+id/textView_30s"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="0"
+        android:textSize="44sp" />
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView_30s"
+        android:layout_below="@+id/textView_30s"
+        android:text="W last 30s" />
+
+
+
+
+
+    <TextView
+        android:id="@+id/textView_metabolic"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_alignRight="@+id/space"
+        android:layout_below="@+id/textView24"
+        android:text="0"
+        android:textSize="44sp" />
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/space"
+        android:layout_below="@+id/textView_metabolic"
+        android:text="metabolic kcal" />
+
+
+
+    <TextView
+        android:id="@+id/textView_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_alignRight="@+id/space"
+        android:layout_below="@+id/textView25"
+        android:text="0"
+        android:textSize="44sp" />
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/space"
+        android:layout_below="@+id/textView_speed"
+        android:text="km/h" />
+
+
+
+
+
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/textView_kcal"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_alignRight="@+id/textView22"
+        android:layout_below="@+id/textView22"
+        android:text="0"
+        android:textSize="44sp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView_kcal"
+        android:layout_below="@+id/textView_kcal"
+        android:text="kcal" />
+
+
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="● • •" />
+
+    <TextView
+        android:id="@+id/textView_watt_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_below="@+id/textView23"
+        android:layout_alignRight="@+id/textView23"
+        android:text="0"
+        android:textSize="44sp" />
+
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView23"
+        android:layout_below="@+id/textView_watt_trip"
+        android:text="W whole trip" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView_smoothness"
+        android:layout_below="@+id/textView_smoothness"
+        android:text="pedal. smooth." />
+
+    <TextView
+        android:id="@+id/textView_smoothness"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_alignRight="@+id/textView53"
+        android:layout_below="@+id/textView53"
+        android:text="0%"
+        android:textSize="44sp" />
+
+    <Space
+        android:layout_width="20sp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView7"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="38dp"
+        android:id="@+id/space" />
+
+    <TextView
+        android:id="@+id/textView_kg"
+        android:textSize="44sp"
+        android:layout_width="wrap_content"
+        android:layout_alignEnd="@+id/textView53"
+        android:layout_alignRight="@+id/textView53"
+        android:layout_below="@+id/textView59"
+        android:layout_height="50sp"
+        android:text="0.00" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView_kg"
+        android:layout_alignRight="@+id/textView_kg"
+        android:layout_below="@+id/textView_kg"
+        android:text="kg" />
+
+</RelativeLayout>

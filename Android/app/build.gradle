@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId 'com.powerino.prototype'
+        minSdkVersion 16
+        targetSdkVersion 19
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    productFlavors {
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:support-vector-drawable:23.4.0'
+}

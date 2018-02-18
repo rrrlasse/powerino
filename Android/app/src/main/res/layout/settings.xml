@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    >
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:focusableInTouchMode="true"
+    android:fillViewport="true"
+
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Select active bike" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView13"
+        android:text="If your power meter is removable, you can attach it to two different bikes that have strain gauge units mounted" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView14"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:id="@+id/radioButton_Bike1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bike 1" />
+
+        <RadioButton
+            android:id="@+id/radioButton_Bike2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bike 2" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="One-time installation steps"
+        android:layout_below="@+id/radioGroup"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pedal arm length in mm between axle centers (e.g. 172.5)"
+        android:layout_below="@+id/textView4" />
+
+
+    <EditText
+        android:id="@+id/editText_PedalArm"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="172.5"
+        android:layout_below="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight you want to use for calibration, in grams (e.g. 4000)."
+        android:layout_below="@+id/editText_PedalArm" />
+
+    <EditText
+        android:id="@+id/editText_Weight"
+        android:text="3000"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_width="100sp"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1) Point the pedal forwards, hang the weight on it and press Start"
+        android:layout_below="@+id/editText_Weight" />
+
+
+    <Button
+        android:id="@+id/buttonWeight"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:layout_below="@+id/textView9" />
+
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2) Remove the weight, keep it pointing forwards and press Start"
+        android:layout_below="@+id/buttonWeight" />
+
+    <Button
+        android:id="@+id/buttonForwards"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView11"
+        android:text="Start" />
+
+
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonForwards"
+        android:text="3) Point the pedal backwards and press Start" />
+
+
+
+    <Button
+        android:id="@+id/buttonBackwards"
+        android:layout_height="wrap_content"
+        android:layout_width="100sp"
+        android:text="Start"
+        android:layout_below="@+id/textView16"
+        />
+
+
+
+
+    <TextView
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zero-calibration"
+        android:layout_below="@+id/buttonBackwards"/>
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do this as needed, especially if temperature changes. Point the pedal forwards and press Zero"
+        android:layout_below="@+id/textView3"
+        />
+
+
+    <Button
+        android:id="@+id/buttonZero"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:text="Zero"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/textView10"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonZero"
+        android:text="Log files" />
+
+    <TextView
+        android:id="@+id/textView_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:text="................................" />
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_log"
+        android:layout_centerHorizontal="true"
+        android:text="• ● •" />
+
+
+</RelativeLayout>
+
+</ScrollView>
