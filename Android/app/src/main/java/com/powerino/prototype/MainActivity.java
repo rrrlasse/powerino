@@ -605,7 +605,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
 
         public void run() {
-            boolean connected = false;
 
             if(Constants.ENABLE_BLUETOOTH) {
                 byte[] buffer = new byte[256];
@@ -613,12 +612,12 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
                 try {
                     mmInStream.read(buffer);
-                    connected = true;
+                    bluetoothConnected = true;
                 }
                 catch(Exception e) {
                 }
 
-                if(connected) {
+                if(bluetoothConnected) {
                     create_log_file();
                     mConnectedThread.write("C");
                     eprom_read(0, 48);
@@ -632,7 +631,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                         bluetoothIn.obtainMessage(handlerState, 0, -1, "").sendToTarget();
                         Sleep(200);
 
-                        if(connected) {
+                        if(bluetoothConnected) {
                             bytes = mmInStream.read(buffer);            //read bytes from input buffer
                             String readMessage = new String(buffer, 0, bytes);
                             // Send the obtained bytes to the UI Activity via handler
