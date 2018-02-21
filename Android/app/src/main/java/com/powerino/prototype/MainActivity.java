@@ -307,8 +307,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
                         if(w != null) {
                             try {
-                                // We need to multiply wattage by 2 because it's a single pedal measurement
-                                w.write(p.time - powermeter_start_time + "\t" + str(p.watt * 2) +
+                                w.write(p.time - powermeter_start_time + "\t" + str(p.watt) +
                                         "\t" + str(p.cadence) +
                                         "\t" + str(p.torque) +
                                         "\t" + str(p.position) +
@@ -335,7 +334,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                     if(System.currentTimeMillis() - last_gui_refresh > 1000 && display.points.size() > 0 && parser.calibrate_initialized[parser.bike_number] == 1) {
                         last_gui_refresh = System.currentTimeMillis();
                         int s = np.getValue();
-                        double w = Math.abs(display.watt(s) * 2); // abs to avoid String.format giving "-0.0"
+                        double w = Math.abs(display.watt(s)); // abs to avoid String.format giving "-0.0"
                         watts.setText(str(w));
                         rpm.setText(Integer.toString((int)display.cadance())); // again int cast to avoid "-0" of String.format
 
@@ -347,10 +346,10 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             textView_kcal = (TextView) findViewById(R.id.textView_kcal);
                             TextView textView_metabolic = (TextView) findViewById(R.id.textView_metabolic);
                             TextView textView_trip = (TextView) findViewById(R.id.textView_trip);
-                            double w2 = display.watt(30) * 2;
+                            double w2 = display.watt(30);
                             textView_30s.setText(str(w2));
                             textView_speed.setText(str(speed()*3.6));
-                            double J = display.total_joule / 4184. * 2.;
+                            double J = display.total_joule / 4184.;
                             textView_kcal.setText(str(J));
                             J = J * metab; // Assuming 22.5% human body efficiency (studies show it's 20 - 25)
                             textView_metabolic.setText(str(J));
@@ -549,8 +548,8 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
             }
 
             if(w != null) {
-                w.write("# kcal = " + str(display.total_joule / 4184. * 2.) + "\n");
-                w.write("# metabolic kcal = " + str(display.total_joule / 4184. * 2. * metab) + "\n");
+                w.write("# kcal = " + str(display.total_joule / 4184.) + "\n");
+                w.write("# metabolic kcal = " + str(display.total_joule / 4184. * metab) + "\n");
                 w.write("# average trip wattage = " + str(display.total_joule / ((System.currentTimeMillis() - android_start_time) / 1000)) + "\n");
                 w.flush();
                 // FIXME: We might have a file handle leak here - how do we know when to close the handle in Android? When it exceeds 1000, the process is killed

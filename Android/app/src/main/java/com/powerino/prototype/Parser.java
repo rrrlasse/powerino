@@ -157,7 +157,10 @@ public class Parser extends Activity
             // angular velocity in radians/second, forward-pedalling being the positive direction
             p.velocity = (float)(-(p.velocity_raw - calibrate_velocity[bike_number]) / (Math.pow(2., 15.) / 2000.) / 360. * 2. * Math.PI);
             p.cadence = (float)(p.velocity / (2 * Math.PI) * 60.);
-            p.watt = (float)((p.velocity > 0 ? p.velocity : 0) * p.torque);
+
+            // Can be negative if/when left leg is pushed up by right leg, but that's fine because it cancels out when gravity helps it
+            // down on the downstroke. Multiply by 2 because we have 2 pedals.
+            p.watt = (float)(p.velocity * p.torque) * 2;
         }
         samples++;
         return p;
