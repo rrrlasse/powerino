@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.NumberPicker;
 
 import java.io.OutputStreamWriter;
@@ -257,7 +258,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         parser.bike_number = getPreferences(Context.MODE_PRIVATE).getInt("bike_number", 0);
 
         // Instantiate a ViewPager and a PagerAdapter.
