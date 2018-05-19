@@ -8,26 +8,26 @@
 #include <avr/sleep.h>    // Sleep Modes
 #include <avr/power.h>
 
-// Bluetooth baudrate. NOTE: Most Bluetooth modules will be configured to 9600 out-o-the-box.
-// If you don't want to configure it, simply replace 38400 by 9600 below. Note that the sample
-// rate of strain gauge readings will then be lower, but still give quite accurate watt readings
-const int btrate = 38400;
-
-// Power usage when supplied with 3.6 V: 38 mA
-
-// The Bluetooth module must use hardware serial (i.e. the Arduino TX and RX pins) because the
-// Arduino software serial library is unable to send and receive data simultaneously (sending
-// disables incoming packet interrupts) which the smartphone apps depend on.
-#define DEVICE Serial
+// Bluetooth baudrate. Most Bluetooth modules are configured to 9600 out-o-the-box which will
+// give 40-60 samples/second. Using 38400 seems to not increase the rate much and also needs
+// you to perform a configuration process of the Bluetooth module.
+const int btrate = 9600;
+//const int btrate = 38400;
 
 bool debug = false;
 bool command_mode = true;
 
+// Power usage when supplied with 3.6 V: 38 mA with these settings. 
 int gauge_sleep = 10;
 int gauge_averages = 1;
 
 int gyro_sleep = 0;
 int gyro_averages = 4;
+
+// The Bluetooth module must use hardware serial (i.e. the Arduino TX and RX pins) because the
+// Arduino software serial library is unable to send and receive data simultaneously (sending
+// disables incoming packet interrupts) which the smartphone apps depend on.
+#define DEVICE Serial
 
 // We connect the HX711 ADC to the Arduino pin 3 (for data) and 2 (for clock) and select an
 // amplification gain of 32, which will implicitly make it sense on its channel B. 
