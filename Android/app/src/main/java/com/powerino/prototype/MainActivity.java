@@ -382,7 +382,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             d += "Powermeter temp.: \n";            v += str(parser.temperature) + " C\n";
                             d += "Data errors: \n";                 v += parser.data_errors + "\n";
                             d += "Vcc: \n";                         v += str(parser.battery) + " V\n";
-                            d += "gauge noise spikes: \n";          v += parser.spikes + "\n";
+                            d += "gauge noise spikes: \n";          v += parser.total_spikes + "\n";
                             d += "gauge voltage: \n";               v += (display.points.size() > 0 ? display.points.get(display.points.size() - 1).voltage : 0) + "\n";
 
                             double gauge_rate = 0;
@@ -401,7 +401,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             d += "Arm backwards: \n";               v += str(!b1 ? 0 : parser.calibrate_backwards[0]) + " / " + str(!b2 ? 0 : parser.calibrate_backwards[1]) + "\n";
                             d += "Delta dvdf: \n";                  v += str(!b1 ? 0 : parser.calibrate_dvdf[0]) + " / " + str(!b2 ? 0 : parser.calibrate_dvdf[1]) + "\n";
                             d += "Zero velocity: \n";               v += str(!b1 ? 0 : parser.calibrate_velocity[0]) + " / " + str(!b2 ? 0 : parser.calibrate_velocity[1]) + "\n";
-                            d += "Arm length (mm): \n";             v += str(!b1 ? 0 : parser.calibrate_arm[0] * 1000) + " / " + str(!b2 ? 0 : parser.calibrate_arm[1] * 1000) + "\n";
+                            d += "Arm length (mm): \n";             v += String.format(Locale.ROOT, "%.1f", !b1 ? 0 : parser.calibrate_arm[0] * 1000) + " / " + String.format(Locale.ROOT, "%.1f", !b2 ? 0 : parser.calibrate_arm[1] * 1000) + "\n";
 
                             textView_description = (TextView) findViewById(R.id.textView_description);
                             textView_description.setText(d);
