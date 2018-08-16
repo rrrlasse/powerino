@@ -6,7 +6,6 @@
     -->
     <style name="AppBaseTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:colorBackground">#000000</item>
         <!--
             Theme customizations available in newer API levels can go in
@@ -16,19 +15,19 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+    <style name="AppTheme" parent="android:Theme.Holo.Wallpaper.NoTitleBar">
         <item name="android:colorBackground">#000000</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:windowBackground">@android:color/black</item>
+
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
 
-    <style name="NumberPickerText">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#FFFFFF</item>
+    <style name="NumberPickerText" parent="android:Theme.Holo">
         <item name="android:textSize">18dp</item>
     </style>
 

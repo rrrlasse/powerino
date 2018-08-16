@@ -15,6 +15,6 @@ public class Constants {
     }
 
     // Set this to false when running in an emulator (they don't support Bluetooth)
-    public static final boolean ENABLE_BLUETOOTH = false;
+    public static final boolean ENABLE_BLUETOOTH = true;
 
 }
