@@ -5,6 +5,8 @@
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -14,6 +16,8 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
@@ -21,6 +25,8 @@
 
 
     <style name="NumberPickerText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">18dp</item>
     </style>
 
