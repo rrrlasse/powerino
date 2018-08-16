@@ -4,9 +4,10 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme">
+    <style name="AppBaseTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:colorBackground">#000000</item>
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -15,7 +16,8 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="">
+    <style name="AppTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+        <item name="android:colorBackground">#000000</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:windowNoTitle">true</item>
