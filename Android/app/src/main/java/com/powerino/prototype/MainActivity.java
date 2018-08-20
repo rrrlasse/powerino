@@ -22,7 +22,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 
 import java.io.OutputStreamWriter;
@@ -340,6 +342,12 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                         watts.setText(str(w));
                         rpm.setText(Integer.toString((int)display.cadance())); // again int cast to avoid "-0" of String.format
 
+                        if(parser.battery != 0 && parser.battery < 3.275) {
+                            // Arduino Pro Mini voltage regulator should give at least 3.28. Signal low battery until power-off. Note that Bluetooth
+                            // might become unstable (packet loss, etc) a while before this point.
+                            ImageView imageView_battery = (ImageView) findViewById(R.id.imageView_battery);
+                            imageView_battery.setVisibility(View.VISIBLE);
+                        }
 
                         TextView textView_watt_trip = (TextView) findViewById(R.id.textView_watt_trip);
                         if(textView_watt_trip != null && display.points.size() > 0) {
