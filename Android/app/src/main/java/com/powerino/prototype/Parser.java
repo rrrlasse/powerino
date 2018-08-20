@@ -69,8 +69,9 @@ public class Parser extends Activity
                     break;
                 }
 
-                // Remove spikes
-                if(spikes < 3 && points.size() > 0 && Math.abs(newpoint.voltage - points.get(points.size() - 1).voltage) > 100000) {
+                // Remove ADC noise spikes. Maximum torque measured in some article on elite sprinters was 290 Nm. Noise
+                // spikes seem to be 1000 - 2000 and there can be more than 10 consecutive
+                if(points.size() > 0 && (newpoint.torque > 300 || newpoint.torque < -300)) {
                     newpoint.voltage = points.get(points.size() - 1).voltage;
                     newpoint.watt = points.get(points.size() - 1).watt;
                     newpoint.torque = points.get(points.size() - 1).torque;

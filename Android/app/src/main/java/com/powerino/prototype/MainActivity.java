@@ -77,7 +77,8 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     public String str(double d) {
         d = d > 9999999 ? 9999999 : (d < -9999999 ? -9999999 : d);
         double a = Math.abs(d);
-        String s = String.format(Locale.ROOT, a >= 100 ? "%.0f" : (a >= 10 ? "%.1f" : "%.2f"), d);
+//        String s = String.format(Locale.ROOT, a >= 100 ? "%.0f" : (a >= 10 ? "%.1f" : "%.2f"), d);
+        String s = String.format(Locale.ROOT, a >= 10 ? "%.0f" : "%.1f", d);
         s = s.equals("-0") ? "0" : (s.equals("-0.0") ? "0.0" : (s.equals("-0.00") ? "0.00" : s));
         return s;
     }
@@ -203,10 +204,10 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         try {
             fo = new FileOutputStream(file);
             w = new OutputStreamWriter(fo);
-            w.write("# See trip summary at the bottom of this file.\n");
-            w.write("#\n");
-            w.write("# time, watt, cadence, torque, pedal position, speed\n");
-            w.write("\n");
+            w.write("# See trip summary at the bottom of this file.\r\n");
+            w.write("#\r\n");
+            w.write("# time, watt, cadence, torque, pedal position, speed\r\n");
+            w.write("\r\n");
         }
         catch (Exception e) {
         }
@@ -313,7 +314,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                                         "\t" + str(p.torque) +
                                         "\t" + str(p.position) +
                                         "\t" + str(speed() * 3.6) +
-                                        "\n");
+                                        "\r\n");
 
                             } catch (Exception e) {
 
@@ -549,9 +550,9 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
             }
 
             if(w != null) {
-                w.write("# kcal = " + str(display.total_joule / 4184.) + "\n");
-                w.write("# metabolic kcal = " + str(display.total_joule / 4184. * metab) + "\n");
-                w.write("# average trip wattage = " + str(display.total_joule / ((System.currentTimeMillis() - android_start_time) / 1000)) + "\n");
+                w.write("# kcal = " + str(display.total_joule / 4184.) + "\r\n");
+                w.write("# metabolic kcal = " + str(display.total_joule / 4184. * metab) + "\r\n");
+                w.write("# average trip wattage = " + str(display.total_joule / ((System.currentTimeMillis() - android_start_time) / 1000)) + "\r\n");
                 w.flush();
                 // FIXME: We might have a file handle leak here - how do we know when to close the handle in Android? When it exceeds 1000, the process is killed
                 // so that the handles are cleaned. But find a better method...
