@@ -72,7 +72,8 @@ class Point {
 
 public class MainActivity extends FragmentActivity implements LocationListener, IFragmentToActivity {
     public File dir;
-    public File file;
+    public File file_full;
+    public File file_simple;
 
     double metab = 4.33;
 
@@ -172,8 +173,10 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     long android_start_time;
     long powermeter_start_time = -1;
 
-    OutputStream fo;
-    Writer w;
+    OutputStream fo_full;
+    Writer w_full;
+    OutputStream fo_simple;
+    Writer w_simple;
 
     LocationManager locationManager;
     Criteria criteria = new Criteria();
@@ -190,26 +193,35 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
         if (Build.VERSION.SDK_INT >= 19) {
             dir.mkdirs();
-            file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Powermeter " + currentDateandTime + ".txt");
+            file_full = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Powermeter " + currentDateandTime + ".txt");
+            file_simple = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Powermeter " + currentDateandTime + "_simple.txt");
         }
         else {
             dir.mkdirs();
-            file = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Powermeter " + currentDateandTime + ".txt");
+            file_full = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Powermeter " + currentDateandTime + ".txt");
+            file_simple = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Powermeter " + currentDateandTime + "_simple.txt");
         }
 
         try {
-            file.createNewFile();
+            file_full.createNewFile();
+            file_simple.createNewFile();
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), "Could not create log file. Try and insert an SD Card.", Toast.LENGTH_SHORT).show();
         }
         try {
-            fo = new FileOutputStream(file);
-            w = new OutputStreamWriter(fo);
-            w.write("# See trip summary at the bottom of this file.\r\n");
-            w.write("#\r\n");
-            w.write("# time, watt, cadence, torque, pedal position, speed\r\n");
-            w.write("\r\n");
+            fo_full = new FileOutputStream(file_full);
+            w_full = new OutputStreamWriter(fo_full);
+
+            fo_simple = new FileOutputStream(file_simple);
+            w_simple = new OutputStreamWriter(fo_simple);
+
+            w_full.write("# time (ms), watt, cadence (RPM), torque (Nm), pedal position, speed (km/h)\r\n");
+            w_full.write("\r\n");
+
+            w_simple.write("# See trip summary at the bottom of this file.\r\n");
+            w_simple.write("#\r\n");
+            w_simple.write("# time, watt, cadence (RPM), 30s watt avg, speed (km/h), kcal, metab kcal, pedal smoothness, pedal kg\r\n");
         }
         catch (Exception e) {
         }
@@ -309,9 +321,9 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             powermeter_start_time = p.time;
                         }
 
-                        if(w != null) {
+                        if(w_full != null) {
                             try {
-                                w.write(p.time - powermeter_start_time + "\t" + str(p.watt) +
+                                w_full.write(p.time - powermeter_start_time + "\t" + str(p.watt) +
                                         "\t" + str(p.cadence) +
                                         "\t" + str(p.torque) +
                                         "\t" + str(p.position) +
@@ -319,7 +331,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                                         "\r\n");
 
                             } catch (Exception e) {
-
                             }
                         }
 
@@ -342,6 +353,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                         watts.setText(str(w));
                         rpm.setText(Integer.toString((int)display.cadance())); // again int cast to avoid "-0" of String.format
 
+
                         if(parser.battery != 0 && parser.battery < 3.275) {
                             // Arduino Pro Mini voltage regulator should give at least 3.28. Signal low battery until power-off. Note that Bluetooth
                             // might become unstable (packet loss, etc) a while before this point.
@@ -349,34 +361,52 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             imageView_battery.setVisibility(View.VISIBLE);
                         }
 
+                        // FIXME: To test this for null is a bad way to find out if main screen is visible
                         TextView textView_watt_trip = (TextView) findViewById(R.id.textView_watt_trip);
-                        if(textView_watt_trip != null && display.points.size() > 0) {
-                            TextView textView_30s = (TextView) findViewById(R.id.textView_30s);
-                            textView_speed = (TextView) findViewById(R.id.textView_speed);
-                            textView_kcal = (TextView) findViewById(R.id.textView_kcal);
-                            TextView textView_metabolic = (TextView) findViewById(R.id.textView_metabolic);
-                            TextView textView_trip = (TextView) findViewById(R.id.textView_trip);
+                        {
                             double w2 = display.watt(30);
-                            textView_30s.setText(str(w2));
-                            textView_speed.setText(str(speed()*3.6));
-                            double J = display.total_joule / 4184.;
-                            textView_kcal.setText(str(J));
-                            J = J * metab; // Assuming 22.5% human body efficiency (studies show it's 20 - 25)
-                            textView_metabolic.setText(str(J));
+                            double kcal = display.total_joule / 4184.;
+                            double kcal_metab = kcal * metab; // Assuming 22.5% human body efficiency (studies show it's 20 - 25)
                             long millis = System.currentTimeMillis() - android_start_time;
                             DateFormat df = new SimpleDateFormat("H:mm:ss");
                             df.setTimeZone(TimeZone.getTimeZone("GMT+0"));
-                            String st = df.format(new Date(millis));
-                            textView_trip.setText(st);
+                            String triptime = df.format(new Date(millis));
 
+                            if(textView_watt_trip != null && display.points.size() > 0) {
+                                TextView textView_30s = (TextView) findViewById(R.id.textView_30s);
+                                textView_speed = (TextView) findViewById(R.id.textView_speed);
+                                textView_kcal = (TextView) findViewById(R.id.textView_kcal);
+                                TextView textView_metabolic = (TextView) findViewById(R.id.textView_metabolic);
+                                TextView textView_trip = (TextView) findViewById(R.id.textView_trip);
+                                TextView textView_smoothness = (TextView) findViewById(R.id.textView_smoothness);
+                                TextView textView_kg = (TextView) findViewById(R.id.textView_kg);
 
-                            textView_watt_trip.setText(str(display.total_joule / (millis / 1000)));
+                                textView_metabolic.setText(str(kcal_metab));
+                                textView_trip.setText(triptime);
+                                textView_watt_trip.setText(str(display.total_joule / (millis / 1000)));
+                                textView_smoothness.setText(Integer.toString((int) display.smoothness()) + "%");
+                                textView_kg.setText(str(display.kg()));
+                                textView_30s.setText(str(w2));
+                                textView_kcal.setText(str(kcal));
+                                textView_speed.setText(str(speed() * 3.6));
+                            }
 
-                            TextView textView_smoothness = (TextView) findViewById(R.id.textView_smoothness);
-                            textView_smoothness.setText(Integer.toString((int)display.smoothness()) + "%");
+                            if(w_simple != null) {
+                                try {
+                                    w_simple.write(triptime +                                           // triptime
+                                            "\t" + str(w) +                                                 // current watt
+                                            "\t" + Integer.toString((int)display.cadance()) +               // cadence
+                                            "\t" + str(w2) +                                                // 30 sec avg wattage
+                                            "\t" + str(speed() * 3.6) +                                 // speed, km/h
+                                            "\t" + str(kcal) +                                              // physical kcal
+                                            "\t" + str(kcal_metab) +                                        // metab kcal
+                                            "\t" + Integer.toString((int) display.smoothness()) + "%" +     // pedal smoothness
+                                            "\t" + str(display.kg()) +                                      // pedal force
+                                            "\r\n");
 
-                            TextView textView_kg = (TextView) findViewById(R.id.textView_kg);
-                            textView_kg.setText(str(display.kg()));
+                                } catch (Exception e) {
+                                }
+                            }
 
                         }
 
@@ -557,11 +587,11 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                 mConnectedThread.write("C");
             }
 
-            if(w != null) {
-                w.write("# kcal = " + str(display.total_joule / 4184.) + "\r\n");
-                w.write("# metabolic kcal = " + str(display.total_joule / 4184. * metab) + "\r\n");
-                w.write("# average trip wattage = " + str(display.total_joule / ((System.currentTimeMillis() - android_start_time) / 1000)) + "\r\n");
-                w.flush();
+            if(w_simple != null) {
+                w_simple.write("# kcal = " + str(display.total_joule / 4184.) + "\r\n");
+                w_simple.write("# metabolic kcal = " + str(display.total_joule / 4184. * metab) + "\r\n");
+                w_simple.write("# average trip wattage = " + str(display.total_joule / ((System.currentTimeMillis() - android_start_time) / 1000)) + "\r\n");
+                w_simple.flush();
                 // FIXME: We might have a file handle leak here - how do we know when to close the handle in Android? When it exceeds 1000, the process is killed
                 // so that the handles are cleaned. But find a better method...
             }
