@@ -78,16 +78,6 @@
         android:layout_below="@+id/textView_speed"
         android:text="km/h" />
 
-
-
-
-
-
-
-
-
-
-
     <TextView
         android:id="@+id/textView_kcal"
         android:layout_width="wrap_content"

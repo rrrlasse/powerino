@@ -72,6 +72,10 @@ public class Display {
             }
         }
 
+        if(count == 0) {
+            return 0;
+        }
+
         if(full_position != 0) {
             return full_watt;
         }

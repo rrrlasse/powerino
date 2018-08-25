@@ -44,6 +44,9 @@ public class Parser extends Activity
             else if(s[0].equals("temperature")) {
                 temperature = Double.parseDouble(s[1]);
             }
+            else if(s[0].equals("vcc")) {
+                vcc = Double.parseDouble(s[1]);
+            }
             else if(s[0].equals("eprom")) {
                 if (s[1].equals("0") && s[2].equals("48")) {
                     for(int bike = 0; bike < 2; bike++) {
@@ -187,7 +190,8 @@ public class Parser extends Activity
     double calibrate_weight = Double.NaN;
     double calibrate_weight_used = Double.NaN;
 
-    double battery = 0;
+    double vcc = 0; // voltage that the Arduino voltage regulator provides
+    double battery = 0; // Battery voltage (RAW pin)
     double temperature = 0;
     int samples = 0;
 

@@ -23,8 +23,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
 import java.io.OutputStreamWriter;
@@ -186,6 +188,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     // Set the global variable `w` to an output stream
     void create_log_file()
     {
+
         // Create log file
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String currentDateandTime = sdf.format(new Date());
@@ -300,7 +303,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
         bluetoothIn = new Handler() {
             public void handleMessage(Message msg) {
-
                 String str = "";
                 if (msg.what != handlerState) {
                     str = "";
@@ -353,17 +355,17 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                         watts.setText(str(w));
                         rpm.setText(Integer.toString((int)display.cadance())); // again int cast to avoid "-0" of String.format
 
-
-                        if(parser.battery != 0 && parser.battery < 3.275) {
-                            // Arduino Pro Mini voltage regulator should give at least 3.28. Signal low battery until power-off. Note that Bluetooth
-                            // might become unstable (packet loss, etc) a while before this point.
-                            ImageView imageView_battery = (ImageView) findViewById(R.id.imageView_battery);
-                            imageView_battery.setVisibility(View.VISIBLE);
-                        }
+                        power_bar(w, 50);
 
                         // FIXME: To test this for null is a bad way to find out if main screen is visible
                         TextView textView_watt_trip = (TextView) findViewById(R.id.textView_watt_trip);
                         {
+                            if(parser.battery != 0 && parser.battery < 3.5) {
+                                // Bluetooth becomes unstable around 3.3 V
+                                ImageView imageView_battery = (ImageView) findViewById(R.id.imageView_battery);
+                                imageView_battery.setVisibility(View.VISIBLE);
+                            }
+
                             double w2 = display.watt(30);
                             double kcal = display.total_joule / 4184.;
                             double kcal_metab = kcal * metab; // Assuming 22.5% human body efficiency (studies show it's 20 - 25)
@@ -420,7 +422,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             d += "Pedal pressure: \n";              v += str(kg) + " kg\n";
                             d += "Powermeter temp.: \n";            v += str(parser.temperature) + " C\n";
                             d += "Data errors: \n";                 v += parser.data_errors + "\n";
-                            d += "Vcc: \n";                         v += str(parser.battery) + " V\n";
+                            d += "Vcc/Battery: \n";                 v += str(parser.vcc) + " / " + str(parser.battery) + " V\n";
                             d += "gauge noise spikes: \n";          v += parser.total_spikes + "\n";
                             d += "gauge voltage: \n";               v += (display.points.size() > 0 ? display.points.get(display.points.size() - 1).voltage : 0) + "\n";
 
@@ -489,7 +491,30 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
     }
 
-
+    void power_bar(double watts, double snap_to)
+    {
+            // Draw the green power bar
+            int w = (int)watts;
+            int s = (int)snap_to;
+            android.widget.FrameLayout a = (android.widget.FrameLayout) findViewById(R.id.a);
+            android.widget.FrameLayout b = (android.widget.FrameLayout) findViewById(R.id.b);
+            android.widget.LinearLayout bar = (android.widget.LinearLayout) findViewById(R.id.bar);
+            ViewGroup.LayoutParams pa = a.getLayoutParams();
+            ViewGroup.LayoutParams pb = b.getLayoutParams();
+            int bh = bar.getHeight();
+            int n100 = (w + (s / 2)) / s * s;
+            double diff = n100 - w;
+            if (diff > 0) {
+                pa.height = 0;
+                pb.height = (int)(diff / (s / 2) * (bh * 2 / 3));
+            }
+            else {
+                pb.height = 0;
+                pa.height = (int)((-diff) / (s / 2) * (bh * 2 / 3));
+            }
+            a.setLayoutParams(pa);
+            b.setLayoutParams(pb);
+    }
 
 
     void eprom_write(float value, long address) {
@@ -644,7 +669,6 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
 
         public void run() {
-
             if(Constants.ENABLE_BLUETOOTH) {
                 byte[] buffer = new byte[256];
                 int bytes;
