@@ -2,16 +2,16 @@ package com.powerino.prototype;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Criteria;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,12 +21,11 @@ import android.os.Message;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
 import java.io.OutputStreamWriter;
@@ -34,7 +33,6 @@ import java.io.Writer;
 import java.nio.ByteBuffer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -343,12 +341,13 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                         parser.points.subList(0, parser.points.size() - 1).clear();
                     }
 
-
                     // Refresh the GUI only if:
                     //     1 second elapsed sincelast refresh, and
                     //     power meter is transmitting data, and
                     //     calibration for selected bike is OK
                     if(System.currentTimeMillis() - last_gui_refresh > 1000 && display.points.size() > 0 && parser.calibrate_initialized[parser.bike_number] == 1) {
+                        //drawView.invalidate();
+
                         last_gui_refresh = System.currentTimeMillis();
                         int s = np.getValue();
                         double w = Math.abs(display.watt(s)); // abs to avoid String.format giving "-0.0"
@@ -423,7 +422,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             d += "Powermeter temp.: \n";            v += str(parser.temperature) + " C\n";
                             d += "Data errors: \n";                 v += parser.data_errors + "\n";
                             d += "Vcc/Battery: \n";                 v += str(parser.vcc) + " / " + str(parser.battery) + " V\n";
-                            d += "gauge noise spikes: \n";          v += parser.total_spikes + "\n";
+                            d += "adc spikes (h/b): \n";            v += parser.spikes_high + "/" + parser.spikes_bump + "\n";
                             d += "gauge voltage: \n";               v += (display.points.size() > 0 ? display.points.get(display.points.size() - 1).voltage : 0) + "\n";
 
                             double gauge_rate = 0;

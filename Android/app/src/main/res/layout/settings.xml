@@ -162,18 +162,28 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Do this as needed, especially if temperature changes. Point the pedal forwards and press Zero"
+        android:text="Do this as needed, especially if temperature changes: Point the pedal forwards and tap on the 'kg' field on the main screen"
         android:layout_below="@+id/textView3"
         />
 
-
-    <Button
-        android:id="@+id/buttonZero"
-        android:layout_width="200sp"
+    <TextView
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Zero"
-        android:layout_below="@+id/textView5"
-        android:layout_centerHorizontal="true" />
+        android:text="Zero-calibration"
+        android:layout_below="@+id/buttonBackwards"/>
+
+
+    <TextView
+        android:id="@+id/textView75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do this as needed, especially if temperature changes: Point the pedal forwards and tap on the 'kg' field on the main screen"
+        android:layout_below="@+id/textView35"
+        />
+
 
 
     <TextView
@@ -182,7 +192,7 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonZero"
+        android:layout_below="@+id/textView5"
         android:text="Log files" />
 
     <TextView

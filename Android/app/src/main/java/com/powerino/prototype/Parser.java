@@ -79,17 +79,29 @@ public class Parser extends Activity
                     newpoint.watt = points.get(points.size() - 1).watt;
                     newpoint.torque = points.get(points.size() - 1).torque;
                     newpoint.kg = points.get(points.size() - 1).kg;
-                    spikes++;
-                    total_spikes++;
-                }
-                else {
-                    spikes = 0;
+                    spikes_high++;
                 }
 
                 if(points.size() > 0) {
                     newpoint.duration = (float)((newpoint.time - points.get(points.size() - 1).time) / 1000.);
                 }
+
                 points.add(newpoint);
+
+                if(points.size() >= 3) {
+                    Point a = points.get(points.size() - 3);
+                    Point b = points.get(points.size() - 2);
+                    Point c = points.get(points.size() - 1);
+
+                    if(Math.abs(a.torque - b.torque) > 100 && Math.abs(a.torque - c.torque) < 50) {
+                        points.get(points.size() - 2).voltage = points.get(points.size() - 1).voltage;
+                        points.get(points.size() - 2).watt = points.get(points.size() - 1).watt;
+                        points.get(points.size() - 2).torque = points.get(points.size() - 1).torque;
+                        points.get(points.size() - 2).kg = points.get(points.size() - 1).kg;
+                        spikes_bump++;
+                    }
+                }
+
 
 
                 // Calibration
@@ -196,8 +208,8 @@ public class Parser extends Activity
     int samples = 0;
 
 
-    int spikes = 0;
-    int total_spikes = 0;
+    int spikes_high = 0;
+    int spikes_bump = 0;
 
     int data_errors = 0;
 

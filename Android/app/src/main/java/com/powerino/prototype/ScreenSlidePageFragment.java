@@ -90,9 +90,6 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
             buttonWeight.setOnClickListener(this);
             buttonBackwards.setOnClickListener(this);
 
-            buttonZero = (Button) rootView.findViewById(R.id.buttonZero);
-            buttonZero.setOnClickListener(this);
-
             buttonBackwards.setEnabled(false);
             buttonForwards.setEnabled(false);
 
@@ -116,6 +113,10 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         else if(mPageNumber == 0) {
             // Inflate the layout containing a title and body text.
             ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.main, container, false);
+            TextView textView_kg = (TextView) rootView.findViewById(R.id.textView_kg);
+            if(textView_kg != null) {
+                textView_kg.setOnClickListener(this);
+            }
 
             return rootView;
         }
@@ -153,17 +154,17 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
 
         int bike = ((MainActivity)getActivity()).parser.bike_number;
-        ((MainActivity) getActivity()).parser.calibrate_weight_used = Integer.parseInt(editText_Weight.getText().toString()) / 1000;
-        ((MainActivity) getActivity()).parser.calibrate_arm[bike] = Float.parseFloat(editText_PedalArm.getText().toString()) / 1000;
 
+        if(v.getId() != R.id.textView_kg) {
+            ((MainActivity) getActivity()).parser.calibrate_weight_used = Integer.parseInt(editText_Weight.getText().toString()) / 1000;
+            ((MainActivity) getActivity()).parser.calibrate_arm[bike] = Float.parseFloat(editText_PedalArm.getText().toString()) / 1000;
 
-        if(v.getId() != R.id.buttonZero) {
             buttonWeight.setEnabled(false);
             buttonForwards.setEnabled(false);
             buttonBackwards.setEnabled(false);
         }
 
-        if(v.getId() == R.id.buttonForwards || v.getId() == R.id.buttonZero) {
+        if(v.getId() == R.id.buttonForwards || v.getId() == R.id.textView_kg) {
             if(v.getId() == R.id.buttonForwards) {
                 buttonBackwards.setEnabled(true);
             }
