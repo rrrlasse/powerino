@@ -18,7 +18,7 @@ bool debug = false;
 bool command_mode = true;
 
 // Power usage when supplied with 3.6 V: 38 mA with these settings. 
-int gauge_sleep = 10;
+int gauge_sleep = 0;
 int gauge_averages = 1;
 
 int gyro_sleep = 0;
@@ -34,7 +34,7 @@ int gyro_averages = 4;
 HX711 scale(3, 2, 32);
 
 // Read voltage of the Vcc pin on the Arduino board. 
-float calibrate_vcc() {
+float read_vcc() {
   long result;
   // Read 1.1V reference against AVcc
   ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
@@ -48,6 +48,15 @@ float calibrate_vcc() {
 }
 
 void setup() {
+
+  pinMode(LED_BUILTIN, OUTPUT);
+  for(int i = 0; i < 8; i++) {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(100);
+  }
+  
   Wire.begin();
 
   wake_gyro();
@@ -127,6 +136,26 @@ void read_command()
   }
 }
 
+// time in units of 100 microseconds
+long us100_time()
+{
+  static unsigned long wraps = 0;
+  static unsigned long last_m = 0;
+  
+  unsigned long m = micros();
+  m = m & 0x0fffffff;
+  
+  if(m < last_m) {
+    wraps++;    
+  }
+  last_m = m;
+
+  m = m >> 4;
+  m = m | (wraps << 24);
+  
+  long ret = (double)m * 16. / 100.;
+  return ret;
+}
 
 void loop() {  
   bool gyro_is_awake = true;
@@ -136,6 +165,10 @@ void loop() {
   int accel;
   int temp;
 
+  // time1 is a sum of all durations that we sent to Bluetooth. By including that in our
+  // calculations we avoid the problem of accumulating rounding errors.
+  unsigned long time1 = us100_time();
+    
   for(;;) 
   {
     do {
@@ -143,24 +176,27 @@ void loop() {
     } while(command_mode);
 
     long voltage = scale.read_average(gauge_averages);
-    long t = millis();
+    unsigned long time2 = us100_time();
+ 
+    unsigned long duration = time2 - time1;
+    time1 += duration;
 
     read_command();
     
     
     if(gyro_sleep > 0) {
-      if(t > gyro_event) {
+      if(time1 > gyro_event) {
         if(gyro_is_awake) {
           read_gyro(gyro, accel, temp, gyro_averages);
           sleep_gyro();
           gyro_is_awake = false;
-          gyro_event = t + gyro_sleep;
+          gyro_event = time1 + gyro_sleep * 10;
         }
         else if(!gyro_is_awake) {
           wake_gyro();
           gyro_is_awake = true;
           // It takes 100 ms for the gyro to wake up
-          gyro_event = t + 100;
+          gyro_event = time1 + 100 * 10;
         }
       }
     }
@@ -179,17 +215,17 @@ void loop() {
     read_command();
 
     if(!debug) {
-      DEVICE.print(t);
+      DEVICE.print(duration);
       DEVICE.print("\t");
     }
 
-    DEVICE.print(voltage);
+    DEVICE.print(voltage / 100);
 
     if(!debug) {
       DEVICE.print("\t");
-      DEVICE.print(gyro);
+      DEVICE.print(gyro / 10);
       DEVICE.print("\t");  
-      DEVICE.print(accel);
+      DEVICE.print(accel / 10);
     }        
     
     DEVICE.print("\n");
@@ -214,10 +250,11 @@ void read_gyro(int& gyro, int& accel, int& temp, int averages) {
   long gyro_sum = 0;
   for(int i = 0; i < averages; i++) {
     Wire.beginTransmission(0x68);
-    Wire.write(0x3B + 4);  // starting with register 0x3B (ACCEL_XOUT_H)
+    Wire.write(0x3B + 2);  // starting with register 0x3B (ACCEL_XOUT_H)
     Wire.endTransmission(false);
-    Wire.requestFrom(0x68,10,true);  // request a total of 14 registers
+    Wire.requestFrom(0x68,12,true);  // request a total of 14 registers
     accel_sum += Wire.read()<<8|Wire.read();  // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+    Wire.read()<<8; Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
     temp = Wire.read()<<8|Wire.read();  // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
     Wire.read()<<8; Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
     Wire.read()<<8; Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
@@ -284,11 +321,16 @@ void write_eprom() {
 
 // Show battery level and temperature
 void show_status() {
-  float vcc = calibrate_vcc();
+  float vcc = read_vcc();
 
-  DEVICE.print("battery\t");
+  DEVICE.print("vcc\t");
   DEVICE.print(vcc);
+  DEVICE.print("\nbattery\t");
+  float adc = analogRead(2);
+  float bat = (adc / 1024.0) * vcc * 2; // * 2 due to the resistors
+  DEVICE.print(bat);
   DEVICE.print("\n");
+  DEVICE.print("version\t2\n");
 
   int dummy;
   int temp;
@@ -311,5 +353,3 @@ void delay_idle(long milliseconds)
     read_command();
   }
 }
-
-
