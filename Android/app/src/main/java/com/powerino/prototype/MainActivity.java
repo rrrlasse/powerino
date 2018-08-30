@@ -8,10 +8,6 @@ import java.io.OutputStream;
 
 import android.content.Context;
 import android.content.IntentFilter;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Criteria;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,7 +17,6 @@ import android.os.Message;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -53,8 +48,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
 
-import com.powerino.prototype.R;
-
 
 class Point {
     double torque = 0;
@@ -66,7 +59,6 @@ class Point {
     float watt = 0;
     float duration = 0;
     float position = 0;
-    int time  = 0;
 };
 
 
@@ -171,7 +163,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     Display display = new Display();
 
     long android_start_time;
-    long powermeter_start_time = -1;
+    double powermeter_sum_time = 0;
 
     OutputStream fo_full;
     Writer w_full;
@@ -317,13 +309,11 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
                     for(int i = 0; i + 1 < parser.points.size(); i++) {
                         Point p = parser.points.get(i);
-                        if (powermeter_start_time == -1) {
-                            powermeter_start_time = p.time;
-                        }
+                        powermeter_sum_time += p.duration;
 
                         if(w_full != null) {
                             try {
-                                w_full.write(p.time - powermeter_start_time + "\t" + str(p.watt) +
+                                w_full.write((int)(powermeter_sum_time * 1000) + "\t" + str(p.watt) +
                                         "\t" + str(p.cadence) +
                                         "\t" + str(p.torque) +
                                         "\t" + str(p.position) +
@@ -345,9 +335,9 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                     //     1 second elapsed sincelast refresh, and
                     //     power meter is transmitting data, and
                     //     calibration for selected bike is OK
-                    if(System.currentTimeMillis() - last_gui_refresh > 1000 && display.points.size() > 0 && parser.calibrate_initialized[parser.bike_number] == 1) {
+                    long elapsed = System.currentTimeMillis() - last_gui_refresh;
+                    if(elapsed > 1000 && display.points.size() > 0 && parser.calibrate_initialized[parser.bike_number] == 1) {
                         //drawView.invalidate();
-
                         last_gui_refresh = System.currentTimeMillis();
                         int s = np.getValue();
                         double w = Math.abs(display.watt(s)); // abs to avoid String.format giving "-0.0"
@@ -368,7 +358,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             double w2 = display.watt(30);
                             double kcal = display.total_joule / 4184.;
                             double kcal_metab = kcal * metab; // Assuming 22.5% human body efficiency (studies show it's 20 - 25)
-                            long millis = System.currentTimeMillis() - android_start_time;
+                            long millis = (long)(powermeter_sum_time * 1000);
                             DateFormat df = new SimpleDateFormat("H:mm:ss");
                             df.setTimeZone(TimeZone.getTimeZone("GMT+0"));
                             String triptime = df.format(new Date(millis));
@@ -384,7 +374,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
                                 textView_metabolic.setText(str(kcal_metab));
                                 textView_trip.setText(triptime);
-                                textView_watt_trip.setText(str(display.total_joule / (millis / 1000)));
+                                textView_watt_trip.setText(str(display.total_joule / ((millis / 1000) == 0 ? 1 : (millis / 1000)) ));
                                 textView_smoothness.setText(Integer.toString((int) display.smoothness()) + "%");
                                 textView_kg.setText(str(display.kg()));
                                 textView_30s.setText(str(w2));
@@ -426,11 +416,14 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             d += "gauge voltage: \n";               v += (display.points.size() > 0 ? display.points.get(display.points.size() - 1).voltage : 0) + "\n";
 
                             double gauge_rate = 0;
-                            if(display.points.size() > 50) {
-                                int siz = display.points.size();
-                                gauge_rate = 50 / ((display.points.get(siz - 1).time - display.points.get(siz - 50).time) / 1000.);
+                            if(display.points.size() >= 50) {
+                                float sum_d = 0;
+                                for(int x = 0; x < 50; x++) {
+                                    sum_d += display.points.get(display.points.size() - 1 - x).duration;
+                                }
+                                gauge_rate = 50 / sum_d;
                             }
-                            d += "BTooth/gauge rate: ";             v += (parser.samples - last_samples) + " / " + (int)(gauge_rate) +  " samples/sec\n";
+                            d += "BTooth/gauge rate: ";             v += (parser.samples - last_samples) * 1000 / elapsed + " / " + (int)(gauge_rate) +  " samples/sec\n";
                             d += "\n";                              v += "\n";
 
                             d += "\nCalibration values:\n"; v += "(bike1 / bike2)\n";

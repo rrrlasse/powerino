@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/space"
         android:layout_below="@+id/textView_metabolic"
-        android:text="metabolic kcal" />
+        android:text="metab. kcal" />
 
 
 
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView_smoothness"
         android:layout_below="@+id/textView_smoothness"
-        android:text="pedal. smooth." />
+        android:text="pedl. smooth." />
 
     <TextView
         android:id="@+id/textView_smoothness"
@@ -155,7 +155,7 @@
         android:layout_alignRight="@+id/textView53"
         android:layout_below="@+id/textView59"
         android:layout_height="50sp"
-        android:text="0.00" />
+        android:text="0" />
 
     <TextView
         android:id="@+id/textView18"

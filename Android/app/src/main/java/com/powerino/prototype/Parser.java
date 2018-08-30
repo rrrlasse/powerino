@@ -62,6 +62,8 @@ public class Parser extends Activity
             else if(s[0].equals("OK")) {
                 // no-op
             }
+            else if(s[0].equals("version")) {
+            }
             else {
                 Point newpoint;
                 try {
@@ -80,10 +82,6 @@ public class Parser extends Activity
                     newpoint.torque = points.get(points.size() - 1).torque;
                     newpoint.kg = points.get(points.size() - 1).kg;
                     spikes_high++;
-                }
-
-                if(points.size() > 0) {
-                    newpoint.duration = (float)((newpoint.time - points.get(points.size() - 1).time) / 1000.);
                 }
 
                 points.add(newpoint);
@@ -158,10 +156,13 @@ public class Parser extends Activity
     Point create(String str) {
         String[] s = str.split("\t");
         Point p = new Point();
-        p.time = Integer.parseInt(s[0]);
-        float v  = Float.parseFloat(s[1]);
-        p.velocity_raw = Integer.parseInt(s[2]);
-        p.position = Float.parseFloat(s[3]);
+
+        // before transmitting via Bluetooth, to save bandwidth (increases total sampling rate alot)
+        p.duration = (float)(Integer.parseInt(s[0]) / 10000.); // milliseconds
+        float v  = Float.parseFloat(s[1]) * 100;
+        p.velocity_raw = (float)(Integer.parseInt(s[2]) * 10.);
+        p.position = (float)(Float.parseFloat(s[3]) * 10.);
+
         p.voltage = v;
 
         if(calibrate_initialized[bike_number] == 1)
