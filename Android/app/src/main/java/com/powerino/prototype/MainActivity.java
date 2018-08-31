@@ -186,8 +186,8 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
         if (Build.VERSION.SDK_INT >= 19) {
             dir.mkdirs();
-            file_full = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Powermeter " + currentDateandTime + ".txt");
-            file_simple = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Powermeter " + currentDateandTime + "_simple.txt");
+            file_full = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Power_" + currentDateandTime + "_full.txt");
+            file_simple = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Power_" + currentDateandTime + "_short.txt");
         }
         else {
             dir.mkdirs();
