@@ -408,7 +408,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             String d = "";
                             String v = "";
 
-                            d += "Pedal pressure: \n";              v += str(kg) + " kg\n";
+                            d += "Pedal pressure: \n";              v += String.format(Locale.ROOT, "%.2f", kg) + " kg\n";
                             d += "Powermeter temp.: \n";            v += str(parser.temperature) + " C\n";
                             d += "Data errors: \n";                 v += parser.data_errors + "\n";
                             d += "Vcc/Battery: \n";                 v += str(parser.vcc) + " / " + str(parser.battery) + " V\n";
@@ -455,7 +455,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
                     int bike = parser.bike_number;
                     if(parser.calibration_type == Constants.CalibrationStatus.WEIGHT_DONE) {
-                        Toast.makeText(getApplicationContext(), "Weight calibration OK (gauge = " + (int)parser.calibrate_arm[bike] + ")", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Weight calibration OK (gauge = " + (int)parser.calibrate_weight + ")", Toast.LENGTH_LONG).show();
                         parser.calibration_type = Constants.CalibrationStatus.NONE;
                         eprom_write((float)parser.calibrate_arm[bike], EEPROM.ARM[bike]);
                     }

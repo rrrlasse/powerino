@@ -103,18 +103,17 @@ public class Parser extends Activity
 
                 if(previous != null) {
                     points.add(previous);
-                    previous = newpoint;
                 }
                 else {
-                    previous = newpoint;
                     // Calibration should not be done with unfiltered points, i.e. one where there
                     // was no previous point to compare against
+                    previous = newpoint;
                     return;
                 }
 
                 // Calibration
                 if(calibration_type == Constants.CalibrationStatus.WEIGHT_IN_PROGRESS) {
-                    calibrate_weight += newpoint.voltage;
+                    calibrate_weight += previous.voltage;
                     calibration_counter--;
                     if(calibration_counter == 0) {
                         calibrate_weight = calibrate_weight / Constants.CALIBRATION_POINTS;
@@ -123,8 +122,8 @@ public class Parser extends Activity
                 }
                 else if(calibration_type == Constants.CalibrationStatus.FORWARDS_IN_PROGRESS) {
                     // This is "zero" calibration
-                    calibrate_forward[bike_number] += newpoint.voltage;
-                    calibrate_velocity[bike_number] += newpoint.velocity_raw;
+                    calibrate_forward[bike_number] += previous.voltage;
+                    calibrate_velocity[bike_number] += previous.velocity_raw;
                     calibration_counter--;
                     if(calibration_counter == 0) {
                         calibrate_forward[bike_number] = calibrate_forward[bike_number] / Constants.CALIBRATION_POINTS;
@@ -133,7 +132,7 @@ public class Parser extends Activity
                     }
                 }
                 else if(calibration_type == Constants.CalibrationStatus.BACKWARDS_IN_PROGRESS) {
-                    calibrate_backwards[bike_number] += newpoint.voltage;
+                    calibrate_backwards[bike_number] += previous.voltage;
                     calibration_counter--;
                     if(calibration_counter == 0) {
                         calibrate_backwards[bike_number] = calibrate_backwards[bike_number] / Constants.CALIBRATION_POINTS;
@@ -145,7 +144,7 @@ public class Parser extends Activity
                     }
                 }
 
-
+                previous = newpoint;
 
             }
         }
@@ -178,7 +177,10 @@ public class Parser extends Activity
         {
             double force = (v - ((calibrate_backwards[bike_number] + calibrate_forward[bike_number]) / 2)) / calibrate_dvdf[bike_number];
             p.torque = force * calibrate_arm[bike_number];
-            p.kg = (float)((v - calibrate_forward[bike_number]) / calibrate_dvdf[bike_number] / 9.815);
+
+            // in user interface we want to show the weight of any *additional* weight on a forwards arm
+            double force2 = (v - ((calibrate_forward[bike_number]) )) / calibrate_dvdf[bike_number];
+            p.kg = (float)(force2 / 9.815);
 
             // angular velocity in radians/second, forward-pedalling being the positive direction
             p.velocity = (float)(-(p.velocity_raw - calibrate_velocity[bike_number]) / (Math.pow(2., 15.) / 2000.) / 360. * 2. * Math.PI);

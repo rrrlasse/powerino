@@ -61,8 +61,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="172" column="28" lean-forward="false" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
+            <state relative-caret-position="272">
+              <caret line="410" column="104" lean-forward="false" selection-start-line="410" selection-start-column="103" selection-end-line="410" selection-end-column="104" />
               <folding />
             </state>
           </provider>
@@ -71,11 +71,9 @@
       <file leaf-file-name="Display.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/Display.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state relative-caret-position="57">
+              <caret line="140" column="35" lean-forward="false" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,8 +94,8 @@
       <file leaf-file-name="IFragmentToActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/IFragmentToActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="85">
+              <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -106,8 +104,8 @@
       <file leaf-file-name="ScreenSlidePageFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/ScreenSlidePageFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="820">
-              <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+            <state relative-caret-position="362">
+              <caret line="159" column="136" lean-forward="false" selection-start-line="159" selection-start-column="136" selection-end-line="159" selection-end-column="136" />
               <folding />
             </state>
           </provider>
@@ -116,54 +114,9 @@
       <file leaf-file-name="FragmentManager.java" pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0-sources.jar!/android/support/v4/app/FragmentManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25670">
-              <caret line="1595" column="37" lean-forward="false" selection-start-line="1595" selection-start-column="37" selection-end-line="1595" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#91915#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#5748#5749#0" expanded="false" />
-                <element signature="e#5789#5790#0" expanded="false" />
-                <element signature="e#14984#14985#0" expanded="false" />
-                <element signature="e#15035#15036#0" expanded="false" />
-                <element signature="e#15485#15486#0" expanded="false" />
-                <element signature="e#15509#15510#0" expanded="false" />
-                <element signature="e#16037#16038#0" expanded="false" />
-                <element signature="e#16098#16099#0" expanded="false" />
-                <element signature="e#19981#19982#0" expanded="false" />
-                <element signature="e#20025#20026#0" expanded="false" />
-                <element signature="e#21524#21525#0" expanded="false" />
-                <element signature="e#21572#21573#0" expanded="false" />
-                <element signature="e#21637#21638#0" expanded="false" />
-                <element signature="e#21680#21681#0" expanded="false" />
-                <element signature="e#21809#21810#0" expanded="false" />
-                <element signature="e#21891#21892#0" expanded="false" />
-                <element signature="e#22276#22277#0" expanded="false" />
-                <element signature="e#22362#22363#0" expanded="false" />
-                <element signature="e#22865#22866#0" expanded="false" />
-                <element signature="e#22951#22952#0" expanded="false" />
-                <element signature="e#23348#23349#0" expanded="false" />
-                <element signature="e#23413#23414#0" expanded="false" />
-                <element signature="e#23487#23488#0" expanded="false" />
-                <element signature="e#23531#23532#0" expanded="false" />
-                <element signature="e#25054#25055#0" expanded="false" />
-                <element signature="e#25084#25085#0" expanded="false" />
-                <element signature="e#25647#25648#0" expanded="false" />
-                <element signature="e#25680#25681#0" expanded="false" />
-                <element signature="e#50767#50768#0" expanded="false" />
-                <element signature="e#50821#50822#0" expanded="false" />
-                <element signature="e#50875#50876#0" expanded="false" />
-                <element signature="e#50926#50927#0" expanded="false" />
-                <element signature="e#81273#81274#0" expanded="false" />
-                <element signature="e#81308#81309#0" expanded="false" />
-                <element signature="e#81848#81849#0" expanded="false" />
-                <element signature="e#81900#81901#0" expanded="false" />
-                <element signature="e#82234#82235#0" expanded="false" />
-                <element signature="e#82295#82296#0" expanded="false" />
-                <element signature="e#82336#82337#0" expanded="false" />
-                <element signature="e#82388#82389#0" expanded="false" />
-                <element signature="e#91587#91588#0" expanded="false" />
-                <element signature="e#91614#91615#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="1599" column="12" lean-forward="false" selection-start-line="1599" selection-start-column="12" selection-end-line="1599" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -186,8 +139,8 @@
       <file leaf-file-name="Parser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="249">
+              <caret line="176" column="9" lean-forward="false" selection-start-line="176" selection-start-column="9" selection-end-line="176" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -196,8 +149,8 @@
       <file leaf-file-name="settings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/settings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2839">
-              <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+            <state relative-caret-position="266">
+              <caret line="90" column="40" lean-forward="false" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -206,13 +159,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="customborder.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/customborder.xml">
+      <file leaf-file-name="debug.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/debug.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="47" lean-forward="false" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+            <state relative-caret-position="187">
+              <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -228,8 +184,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>drawV</find>
-      <find>drawView</find>
       <find>%</find>
       <find>draw</find>
       <find>invalid</find>
@@ -241,12 +195,10 @@
       <find>textView_kg</find>
       <find>ped</find>
       <find>textView_kcal</find>
-      <find>editText_Weight</find>
       <find>oncre</find>
       <find>getPreferences</find>
       <find>buttonZero</find>
       <find>y</find>
-      <find>kg</find>
       <find>MODE_PRIVATE</find>
       <find>&quot;s&quot;</find>
       <find>rate</find>
@@ -258,6 +210,10 @@
       <find>duration</find>
       <find>time</find>
       <find>gauge ra</find>
+      <find>Powermet</find>
+      <find>kg</find>
+      <find>editText_Weight</find>
+      <find>calibrate_weight_used</find>
     </findStrings>
     <dirStrings>
       <dir>D:\Powerino\app</dir>
@@ -2022,9 +1978,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/Constants.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/DrawView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/ScreenSlidePageFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/ScreenSlidePageFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/Parser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/MainActivity.java" />
       </list>
@@ -2063,6 +2019,84 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prototype" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -2073,7 +2107,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="device.picker.selection" value="0123456789ABCDEF" />
+    <property name="device.picker.selection" value="PMF4C17A27004629" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="android.project.structure.last.selected" value="Ads" />
     <property name="android.project.structure.proportion" value="0.15" />
@@ -2182,7 +2216,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535735106520" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535758332957" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2230,7 +2264,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535735106520" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535758332957" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2392,7 +2426,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535735106522" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535758332959" />
       </method>
     </configuration>
     <list size="1">
@@ -2451,7 +2485,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2681388" sideWeight="0.6061208" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3054371" sideWeight="0.49722" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3052464" sideWeight="0.49722" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37665197" sideWeight="0.49841017" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.49841017" order="10" side_tool="false" content_ui="tabs" />
@@ -2465,7 +2499,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45719844" sideWeight="0.6983307" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34463722" sideWeight="0.6983307" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2515,7 +2549,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="631" />
+      <option name="time" value="649" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2693,16 +2727,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/debug.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-19/android.jar!/android/os/Looper.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -2734,17 +2758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2839">
-          <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/customborder.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -2764,77 +2777,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0-sources.jar!/android/support/v4/app/FragmentManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25670">
-          <caret line="1595" column="37" lean-forward="false" selection-start-line="1595" selection-start-column="37" selection-end-line="1595" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#91915#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#5748#5749#0" expanded="false" />
-            <element signature="e#5789#5790#0" expanded="false" />
-            <element signature="e#14984#14985#0" expanded="false" />
-            <element signature="e#15035#15036#0" expanded="false" />
-            <element signature="e#15485#15486#0" expanded="false" />
-            <element signature="e#15509#15510#0" expanded="false" />
-            <element signature="e#16037#16038#0" expanded="false" />
-            <element signature="e#16098#16099#0" expanded="false" />
-            <element signature="e#19981#19982#0" expanded="false" />
-            <element signature="e#20025#20026#0" expanded="false" />
-            <element signature="e#21524#21525#0" expanded="false" />
-            <element signature="e#21572#21573#0" expanded="false" />
-            <element signature="e#21637#21638#0" expanded="false" />
-            <element signature="e#21680#21681#0" expanded="false" />
-            <element signature="e#21809#21810#0" expanded="false" />
-            <element signature="e#21891#21892#0" expanded="false" />
-            <element signature="e#22276#22277#0" expanded="false" />
-            <element signature="e#22362#22363#0" expanded="false" />
-            <element signature="e#22865#22866#0" expanded="false" />
-            <element signature="e#22951#22952#0" expanded="false" />
-            <element signature="e#23348#23349#0" expanded="false" />
-            <element signature="e#23413#23414#0" expanded="false" />
-            <element signature="e#23487#23488#0" expanded="false" />
-            <element signature="e#23531#23532#0" expanded="false" />
-            <element signature="e#25054#25055#0" expanded="false" />
-            <element signature="e#25084#25085#0" expanded="false" />
-            <element signature="e#25647#25648#0" expanded="false" />
-            <element signature="e#25680#25681#0" expanded="false" />
-            <element signature="e#50767#50768#0" expanded="false" />
-            <element signature="e#50821#50822#0" expanded="false" />
-            <element signature="e#50875#50876#0" expanded="false" />
-            <element signature="e#50926#50927#0" expanded="false" />
-            <element signature="e#81273#81274#0" expanded="false" />
-            <element signature="e#81308#81309#0" expanded="false" />
-            <element signature="e#81848#81849#0" expanded="false" />
-            <element signature="e#81900#81901#0" expanded="false" />
-            <element signature="e#82234#82235#0" expanded="false" />
-            <element signature="e#82295#82296#0" expanded="false" />
-            <element signature="e#82336#82337#0" expanded="false" />
-            <element signature="e#82388#82389#0" expanded="false" />
-            <element signature="e#91587#91588#0" expanded="false" />
-            <element signature="e#91614#91615#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/IFragmentToActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/Display.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -2848,26 +2790,72 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="90" column="40" lean-forward="false" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/Display.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="140" column="35" lean-forward="false" selection-start-line="140" selection-start-column="35" selection-end-line="140" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/23.4.0/support-v4-23.4.0-sources.jar!/android/support/v4/app/FragmentManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="1599" column="12" lean-forward="false" selection-start-line="1599" selection-start-column="12" selection-end-line="1599" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/IFragmentToActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/ScreenSlidePageFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="820">
-          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+        <state relative-caret-position="362">
+          <caret line="159" column="136" lean-forward="false" selection-start-line="159" selection-start-column="136" selection-end-line="159" selection-end-column="136" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state relative-caret-position="249">
+          <caret line="176" column="9" lean-forward="false" selection-start-line="176" selection-start-column="9" selection-end-line="176" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/debug.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/powerino/prototype/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="172" column="28" lean-forward="false" selection-start-line="172" selection-start-column="28" selection-end-line="172" selection-end-column="28" />
+        <state relative-caret-position="272">
+          <caret line="410" column="104" lean-forward="false" selection-start-line="410" selection-start-column="103" selection-end-line="410" selection-end-column="104" />
           <folding />
         </state>
       </provider>

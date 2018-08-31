@@ -156,8 +156,9 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
         int bike = ((MainActivity)getActivity()).parser.bike_number;
 
         if(v.getId() != R.id.textView_kg) {
-            ((MainActivity) getActivity()).parser.calibrate_weight_used = Integer.parseInt(editText_Weight.getText().toString()) / 1000;
-            ((MainActivity) getActivity()).parser.calibrate_arm[bike] = Float.parseFloat(editText_PedalArm.getText().toString()) / 1000;
+            ((MainActivity) getActivity()).parser.calibrate_weight_used = Integer.parseInt(editText_Weight.getText().toString()) / 1000.;
+            ((MainActivity) getActivity()).parser.calibrate_arm[bike] = Float.parseFloat(editText_PedalArm.getText().toString()) / 1000.;
+            double d = ((MainActivity) getActivity()).parser.calibrate_weight_used;
 
             buttonWeight.setEnabled(false);
             buttonForwards.setEnabled(false);
