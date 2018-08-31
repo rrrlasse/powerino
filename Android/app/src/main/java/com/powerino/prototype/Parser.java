@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Parser extends Activity
 {
+    Point previous = null;
     String concat = "";
 
     void parse(String bluetooth) {
@@ -76,31 +77,40 @@ public class Parser extends Activity
 
                 // Remove ADC noise spikes. Maximum torque measured in some article on elite sprinters was 290 Nm. Noise
                 // spikes seem to be 1000 - 2000 and there can be more than 10 consecutive
-                if(points.size() > 0 && (newpoint.torque > 300 || newpoint.torque < -300)) {
-                    newpoint.voltage = points.get(points.size() - 1).voltage;
-                    newpoint.watt = points.get(points.size() - 1).watt;
-                    newpoint.torque = points.get(points.size() - 1).torque;
-                    newpoint.kg = points.get(points.size() - 1).kg;
+                if(previous != null && (newpoint.torque > 300 || newpoint.torque < -300)) {
+                    newpoint.voltage = previous.voltage;
+                    newpoint.watt = previous.watt;
+                    newpoint.torque = previous.torque;
+                    newpoint.kg = previous.kg;
                     spikes_high++;
                 }
 
-                points.add(newpoint);
+//                points.add(newpoint);
 
-                if(points.size() >= 3) {
-                    Point a = points.get(points.size() - 3);
-                    Point b = points.get(points.size() - 2);
+                if(points.size() >= 1 && previous != null) {
+                    Point a = newpoint;
+                    Point b = previous;
                     Point c = points.get(points.size() - 1);
-
+                    // 17
                     if(Math.abs(a.torque - b.torque) > 100 && Math.abs(a.torque - c.torque) < 50) {
-                        points.get(points.size() - 2).voltage = points.get(points.size() - 1).voltage;
-                        points.get(points.size() - 2).watt = points.get(points.size() - 1).watt;
-                        points.get(points.size() - 2).torque = points.get(points.size() - 1).torque;
-                        points.get(points.size() - 2).kg = points.get(points.size() - 1).kg;
+                        previous.voltage = newpoint.voltage;
+                        previous.watt = points.get(points.size() - 1).watt;
+                        previous.torque = points.get(points.size() - 1).torque;
+                        previous.kg = points.get(points.size() - 1).kg;
                         spikes_bump++;
                     }
                 }
 
-
+                if(previous != null) {
+                    points.add(previous);
+                    previous = newpoint;
+                }
+                else {
+                    previous = newpoint;
+                    // Calibration should not be done with unfiltered points, i.e. one where there
+                    // was no previous point to compare against
+                    return;
+                }
 
                 // Calibration
                 if(calibration_type == Constants.CalibrationStatus.WEIGHT_IN_PROGRESS) {
@@ -127,7 +137,6 @@ public class Parser extends Activity
                     calibration_counter--;
                     if(calibration_counter == 0) {
                         calibrate_backwards[bike_number] = calibrate_backwards[bike_number] / Constants.CALIBRATION_POINTS;
-
 
                         // delta-voltage per delta-Newton
                         calibrate_dvdf[bike_number] = (calibrate_weight - calibrate_forward[bike_number]) / (calibrate_weight_used * 9.815);

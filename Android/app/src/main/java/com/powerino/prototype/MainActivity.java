@@ -609,8 +609,10 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                 w_simple.write("# metabolic kcal = " + str(display.total_joule / 4184. * metab) + "\r\n");
                 w_simple.write("# average trip wattage = " + str(display.total_joule / ((System.currentTimeMillis() - android_start_time) / 1000)) + "\r\n");
                 w_simple.flush();
-                // FIXME: We might have a file handle leak here - how do we know when to close the handle in Android? When it exceeds 1000, the process is killed
-                // so that the handles are cleaned. But find a better method...
+                w_simple.close();
+
+                w_full.flush();
+                w_full.close();
             }
             if(Constants.ENABLE_BLUETOOTH) {
                 //Don't leave Bluetooth sockets open when leaving activity
