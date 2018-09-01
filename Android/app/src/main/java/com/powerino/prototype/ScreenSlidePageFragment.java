@@ -4,10 +4,13 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -17,6 +20,8 @@ import android.widget.Toast;
 import com.powerino.prototype.R;
 
 import org.w3c.dom.Text;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class ScreenSlidePageFragment extends Fragment implements View.OnClickListener {
@@ -108,6 +113,9 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
                 }
             });
 
+            editText_Weight.setText(getActivity().getPreferences(Context.MODE_PRIVATE).getString("weight", "3000"));
+            editText_PedalArm.setText(getActivity().getPreferences(Context.MODE_PRIVATE).getString("arm", "172.5"));
+
             return rootView;
         }
         else if(mPageNumber == 0) {
@@ -147,11 +155,16 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        editText_Weight.clearFocus();
+        editText_PedalArm.clearFocus();
+
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("weight", editText_Weight.getText().toString()).commit();
+        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("arm", editText_PedalArm.getText().toString()).commit();
+
         if (!((MainActivity)getActivity()).bluetoothConnected) {
             Toast.makeText(getActivity(), "Error: Not connected to Bluetooth", Toast.LENGTH_LONG).show();
             return;
         }
-
 
         int bike = ((MainActivity)getActivity()).parser.bike_number;
 
