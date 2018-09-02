@@ -155,11 +155,7 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        editText_Weight.clearFocus();
-        editText_PedalArm.clearFocus();
 
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("weight", editText_Weight.getText().toString()).commit();
-        getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("arm", editText_PedalArm.getText().toString()).commit();
 
         if (!((MainActivity)getActivity()).bluetoothConnected) {
             Toast.makeText(getActivity(), "Error: Not connected to Bluetooth", Toast.LENGTH_LONG).show();
@@ -168,33 +164,42 @@ public class ScreenSlidePageFragment extends Fragment implements View.OnClickLis
 
         int bike = ((MainActivity)getActivity()).parser.bike_number;
 
-        if(v.getId() != R.id.textView_kg) {
+        if(v.getId() == R.id.buttonForwards) {
             ((MainActivity) getActivity()).parser.calibrate_weight_used = Integer.parseInt(editText_Weight.getText().toString()) / 1000.;
             ((MainActivity) getActivity()).parser.calibrate_arm[bike] = Float.parseFloat(editText_PedalArm.getText().toString()) / 1000.;
             double d = ((MainActivity) getActivity()).parser.calibrate_weight_used;
 
             buttonWeight.setEnabled(false);
             buttonForwards.setEnabled(false);
-            buttonBackwards.setEnabled(false);
+            buttonBackwards.setEnabled(true);
         }
 
         if(v.getId() == R.id.buttonForwards || v.getId() == R.id.textView_kg) {
-            if(v.getId() == R.id.buttonForwards) {
-                buttonBackwards.setEnabled(true);
-            }
             ((MainActivity)getActivity()).parser.calibration_counter = Constants.CALIBRATION_POINTS;
             ((MainActivity)getActivity()).parser.calibrate_forward[bike] = 0;
             ((MainActivity)getActivity()).parser.calibrate_velocity[bike] = 0;
             ((MainActivity)getActivity()).parser.calibration_type = Constants.CalibrationStatus.FORWARDS_IN_PROGRESS;
         }
         if(v.getId() == R.id.buttonWeight) {
+            buttonWeight.setEnabled(false);
             buttonForwards.setEnabled(true);
+            buttonBackwards.setEnabled(false);
+
+            editText_Weight.clearFocus();
+            editText_PedalArm.clearFocus();
+
+            getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("weight", editText_Weight.getText().toString()).commit();
+            getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("arm", editText_PedalArm.getText().toString()).commit();
+
             ((MainActivity)getActivity()).parser.calibrate_weight = 0;
             ((MainActivity)getActivity()).parser.calibration_counter = Constants.CALIBRATION_POINTS;
             ((MainActivity)getActivity()).parser.calibration_type = Constants.CalibrationStatus.WEIGHT_IN_PROGRESS;
         }
         if(v.getId() == R.id.buttonBackwards) {
             buttonWeight.setEnabled(true);
+            buttonForwards.setEnabled(false);
+            buttonBackwards.setEnabled(false);
+
             ((MainActivity)getActivity()).parser.calibrate_backwards[bike] = 0;
             ((MainActivity)getActivity()).parser.calibration_counter = Constants.CALIBRATION_POINTS;
             ((MainActivity)getActivity()).parser.calibration_type = Constants.CalibrationStatus.BACKWARDS_IN_PROGRESS;

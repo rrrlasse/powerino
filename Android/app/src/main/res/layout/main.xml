@@ -164,6 +164,6 @@
         android:layout_alignEnd="@+id/textView_kg"
         android:layout_alignRight="@+id/textView_kg"
         android:layout_below="@+id/textView_kg"
-        android:text="kg" />
+        android:text="kg (tap to 0)" />
 
 </RelativeLayout>
