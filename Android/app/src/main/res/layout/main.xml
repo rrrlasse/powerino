@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView_30s"
         android:layout_below="@+id/textView_30s"
-        android:text="W last 30s" />
+        android:text="W 30s" />
 
 
 
@@ -79,7 +79,7 @@
         android:text="RPM" />
 
     <TextView
-        android:id="@+id/textView_kcal"
+        android:id="@+id/textView_avgspeed"
         android:layout_width="wrap_content"
         android:layout_height="50sp"
         android:layout_alignRight="@+id/textView22"
@@ -91,9 +91,9 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView_kcal"
-        android:layout_below="@+id/textView_kcal"
-        android:text="kcal" />
+        android:layout_alignRight="@+id/textView_avgspeed"
+        android:layout_below="@+id/textView_avgspeed"
+        android:text="avg trip speed" />
 
 
 
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView23"
         android:layout_below="@+id/textView_watt_trip"
-        android:text="W whole trip" />
+        android:text="avg trip W" />
 
     <TextView
         android:id="@+id/textView59"

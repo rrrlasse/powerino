@@ -67,6 +67,10 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     public File file_full;
     public File file_simple;
 
+    // to compute average_speed = speed_sum / speed_samples
+    double speed_sum = 0;
+    int speed_samples = 0;
+
     double metab = 4.33;
 
     public String str(double d) {
@@ -140,7 +144,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     int last_samples = 0;
     Vector<Vector<Double>> smooth_avg = new Vector<Vector<Double>>();
 
-    TextView sensorView1, speed, watts, textView_speed, textView_kcal, textView_value, textView_description;
+    TextView sensorView1, speed, watts, textView_speed, textView_avgspeed, textView_value, textView_description;
 
     Handler bluetoothIn;
     public boolean bluetoothConnected = false;
@@ -212,7 +216,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
             w_simple.write("# See trip summary at the bottom of this file.\r\n");
             w_simple.write("#\r\n");
-            w_simple.write("# time, watt, cadence (RPM), 30s watt avg, speed (km/h), kcal, metab kcal, pedal smoothness, pedal kg\r\n");
+            w_simple.write("# time, watt, cadence (RPM), 30s watt avg, speed (km/h), avg speed, metab kcal, pedal smoothness, pedal kg\r\n");
         }
         catch (Exception e) {
         }
@@ -229,7 +233,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         catch(Exception e) {
             d = -1;
         }
-        return d;
+        return d * 3.6;
     }
 
     @Override
@@ -295,6 +299,9 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
             dir.mkdirs();
         }
 
+        speed_samples = 0;
+        speed_sum = 0;
+
         bluetoothIn = new Handler() {
             public void handleMessage(Message msg) {
                 String str = "";
@@ -321,7 +328,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                                         "\t" + str(p.cadence) +
                                         "\t" + str(p.torque) +
                                         "\t" + str(p.position) +
-                                        "\t" + str(speed() * 3.6) +
+                                        "\t" + str(speed()) +
                                         "\r\n");
 
                             } catch (Exception e) {
@@ -346,7 +353,14 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                         int s = np.getValue();
                         double w = Math.abs(display.watt(s)); // abs to avoid String.format giving "-0.0"
                         watts.setText(str(w));
-                        speed.setText(str(speed() * 3.6));
+                        double sp = speed();
+
+                        speed_samples++;
+                        speed_sum += sp;
+
+                        double avg_speed = speed_sum / speed_samples;
+
+                        speed.setText(str(sp));
 
                         power_bar(w, 50);
 
@@ -370,7 +384,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                             if(textView_watt_trip != null && display.points.size() > 0) {
                                 TextView textView_30s = (TextView) findViewById(R.id.textView_30s);
                                 TextView textView_rpm = (TextView) findViewById(R.id.textView_rpm);
-                                textView_kcal = (TextView) findViewById(R.id.textView_kcal);
+                                textView_avgspeed = (TextView) findViewById(R.id.textView_avgspeed);
                                 TextView textView_metabolic = (TextView) findViewById(R.id.textView_metabolic);
                                 TextView textView_trip = (TextView) findViewById(R.id.textView_trip);
                                 TextView textView_smoothness = (TextView) findViewById(R.id.textView_smoothness);
@@ -382,7 +396,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                                 textView_smoothness.setText(Integer.toString((int) display.smoothness()) + "%");
                                 textView_kg.setText(str(display.kg()));
                                 textView_30s.setText(str(w2));
-                                textView_kcal.setText(str(kcal));
+                                textView_avgspeed.setText(str(avg_speed));
                                 textView_rpm.setText(Integer.toString((int)display.cadance())); // again int cast to avoid "-0" of String.format
                             }
 
@@ -392,8 +406,8 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                                             "\t" + str(w) +                                                 // current watt
                                             "\t" + Integer.toString((int)display.cadance()) +               // cadence
                                             "\t" + str(w2) +                                                // 30 sec avg wattage
-                                            "\t" + str(speed() * 3.6) +                                 // speed, km/h
-                                            "\t" + str(kcal) +                                              // physical kcal
+                                            "\t" + str(speed()) +                                 // speed, km/h
+                                            "\t" + str(avg_speed) +                                         // avg trip speed
                                             "\t" + str(kcal_metab) +                                        // metab kcal
                                             "\t" + Integer.toString((int) display.smoothness()) + "%" +     // pedal smoothness
                                             "\t" + str(display.kg()) +                                      // pedal force
