@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10sp"
-        android:layout_below="@+id/numberPicker"
+        android:layout_below="@+id/speed"
         android:layout_toEndOf="@+id/bar"
         android:layout_toRightOf="@+id/bar" />
 

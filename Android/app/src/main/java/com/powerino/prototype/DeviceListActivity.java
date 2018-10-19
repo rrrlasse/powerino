@@ -123,8 +123,13 @@ public class DeviceListActivity extends Activity implements LocationListener {
                 TextView tv = (TextView)findViewById(R.id.precision);
                 if(tv != null) {
                     Location location = locationManager.getLastKnownLocation(bestProvider);
-                    float f = location.getAccuracy();
-                    setText(tv, "GPS precision: " +  Integer.toString((int)f) + " m" );
+                    if(location == null) {
+                        setText(tv, "GPS precision: Finding satelites...");
+                    }
+                    else {
+                        float f = location.getAccuracy();
+                        setText(tv, "GPS precision: " + Integer.toString((int) f) + " m");
+                    }
                 }
             }
         };
