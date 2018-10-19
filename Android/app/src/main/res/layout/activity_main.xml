@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10sp"
-        android:layout_below="@+id/rpm"
+        android:layout_below="@+id/numberPicker"
         android:layout_toEndOf="@+id/bar"
         android:layout_toRightOf="@+id/bar" />
 
@@ -54,7 +54,7 @@
        />
 
     <TextView
-        android:id="@+id/rpm"
+        android:id="@+id/speed"
         android:layout_width="wrap_content"
         android:layout_height="82sp"
         android:textSize="72sp"
@@ -67,9 +67,9 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RPM"
-        android:layout_alignBaseline="@+id/rpm"
-        android:layout_alignBottom="@+id/rpm"
+        android:text="km/h"
+        android:layout_alignBaseline="@+id/speed"
+        android:layout_alignBottom="@+id/speed"
         android:layout_toLeftOf="@+id/numberPicker"
         />
 

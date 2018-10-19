@@ -1,10 +1,17 @@
 package com.powerino.prototype;
 
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,16 +26,30 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.powerino.prototype.R;
 
 
-public class DeviceListActivity extends Activity {
+public class DeviceListActivity extends Activity implements LocationListener {
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
+    @Override
+    public void onLocationChanged(android.location.Location location) {
+    }
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
+
     // Debugging for LOGCAT
     private static final String TAG = "DeviceListActivity";
     private static final boolean D = true;
-    
+
   
     // declare button for launching website and textview for connection status
     Button tlbutton;
     TextView textView1;
-    
+    private TimerTask timerTask;
+
     // EXTRA string to send on to mainactivity
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
@@ -48,6 +69,16 @@ public class DeviceListActivity extends Activity {
     	super.onResume();
     	//*************** 
     	checkBTState();
+
+
+
+        // Activate GPS
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, this);
+        criteria.setAccuracy(Criteria.ACCURACY_FINE );
+        bestProvider = locationManager.getBestProvider(criteria, true);
+
+
 
     	textView1 = (TextView) findViewById(R.id.connecting);
     	textView1.setTextSize(40);
@@ -86,11 +117,31 @@ public class DeviceListActivity extends Activity {
             startActivity(i);
         }
 
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                TextView tv = (TextView)findViewById(R.id.precision);
+                if(tv != null) {
+                    Location location = locationManager.getLastKnownLocation(bestProvider);
+                    float f = location.getAccuracy();
+                    setText(tv, "GPS precision: " +  Integer.toString((int)f) + " m" );
+                }
+            }
+        };
+        timer = new Timer();
+        timer.scheduleAtFixedRate(timerTask, 0, 2000);
+
     }
 
+    public void onPause() {
+
+        locationManager.removeUpdates(this);
+        super.onPause();
+    }
     // Set up on-click listener for the list (nicked this - unsure)
     private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
+            timer.cancel();
 
         	textView1.setText("Connecting...");
             // Get the device MAC address, which is the last 17 chars in the View
@@ -100,7 +151,7 @@ public class DeviceListActivity extends Activity {
             // Make an intent to start next activity while taking an extra which is the MAC address.
 			Intent i = new Intent(DeviceListActivity.this, MainActivity.class);
             i.putExtra(EXTRA_DEVICE_ADDRESS, address);
-			startActivity(i);   
+			startActivity(i);
         }
     };
 
@@ -120,4 +171,18 @@ public class DeviceListActivity extends Activity {
             }
           }
         }
+
+    LocationManager locationManager;
+    Criteria criteria = new Criteria();
+    String bestProvider;
+    private Timer timer = new Timer();
+
+    private void setText(final TextView text,final String value){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                text.setText(value);
+            }
+        });
+    }
 }

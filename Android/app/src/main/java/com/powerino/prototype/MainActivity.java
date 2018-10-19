@@ -140,7 +140,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
     int last_samples = 0;
     Vector<Vector<Double>> smooth_avg = new Vector<Vector<Double>>();
 
-    TextView sensorView1, rpm, watts, textView_speed, textView_kcal, textView_value, textView_description;
+    TextView sensorView1, speed, watts, textView_speed, textView_kcal, textView_value, textView_description;
 
     Handler bluetoothIn;
     public boolean bluetoothConnected = false;
@@ -185,14 +185,12 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         String path;
 
         if (Build.VERSION.SDK_INT >= 19) {
-            dir.mkdirs();
-            file_full = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Full_" + currentDateandTime + ".txt");
-            file_simple = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Simple_" + currentDateandTime + ".txt");
+            file_full = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Full/" + currentDateandTime + ".txt");
+            file_simple = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Simple/" + currentDateandTime + ".txt");
         }
         else {
-            dir.mkdirs();
-            file_full = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Full_" + currentDateandTime + ".txt");
-            file_simple = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Simple " + currentDateandTime + ".txt");
+            file_full = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Full/" + currentDateandTime + ".txt");
+            file_simple = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Simple/ " + currentDateandTime + ".txt");
         }
 
         try {
@@ -275,7 +273,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         mPager.setAdapter(mPagerAdapter);
 
         watts = (TextView) findViewById(R.id.watts);
-        rpm = (TextView) findViewById(R.id.rpm);
+        speed = (TextView) findViewById(R.id.speed);
 
         np = (NumberPicker) findViewById(R.id.numberPicker);
         np.setMaxValue(30);
@@ -285,10 +283,16 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
         android_start_time = System.currentTimeMillis();
 
         if (Build.VERSION.SDK_INT >= 19) {
-            dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter");
+            dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Full");
+            dir.mkdirs();
+            dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Powermeter/Simple");
+            dir.mkdirs();
         }
         else {
-            dir = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter");
+            dir = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Full");
+            dir.mkdirs();
+            dir = new File(Environment.getExternalStorageDirectory() + "/Documents" + "/Powermeter/Simple");
+            dir.mkdirs();
         }
 
         bluetoothIn = new Handler() {
@@ -342,7 +346,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                         int s = np.getValue();
                         double w = Math.abs(display.watt(s)); // abs to avoid String.format giving "-0.0"
                         watts.setText(str(w));
-                        rpm.setText(Integer.toString((int)display.cadance())); // again int cast to avoid "-0" of String.format
+                        speed.setText(str(speed() * 3.6));
 
                         power_bar(w, 50);
 
@@ -365,7 +369,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
 
                             if(textView_watt_trip != null && display.points.size() > 0) {
                                 TextView textView_30s = (TextView) findViewById(R.id.textView_30s);
-                                textView_speed = (TextView) findViewById(R.id.textView_speed);
+                                TextView textView_rpm = (TextView) findViewById(R.id.textView_rpm);
                                 textView_kcal = (TextView) findViewById(R.id.textView_kcal);
                                 TextView textView_metabolic = (TextView) findViewById(R.id.textView_metabolic);
                                 TextView textView_trip = (TextView) findViewById(R.id.textView_trip);
@@ -379,7 +383,7 @@ public class MainActivity extends FragmentActivity implements LocationListener, 
                                 textView_kg.setText(str(display.kg()));
                                 textView_30s.setText(str(w2));
                                 textView_kcal.setText(str(kcal));
-                                textView_speed.setText(str(speed() * 3.6));
+                                textView_rpm.setText(Integer.toString((int)display.cadance())); // again int cast to avoid "-0" of String.format
                             }
 
                             if(w_simple != null) {

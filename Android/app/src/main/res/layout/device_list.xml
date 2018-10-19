@@ -7,8 +7,8 @@ android:orientation="vertical"
     <TextView android:id="@+id/title_paired_devices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Select btSerial device from paired devices:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Wait for acceptable GPS precision and select HC-05 to start a trip (pair with it it in Android settings if not visible)"
         android:visibility="gone"
         android:background="#666"
         android:textColor="#fff"
@@ -27,12 +27,15 @@ android:orientation="vertical"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/infoText"
-        android:layout_width="wrap_content"
+    <TextView android:id="@+id/precision"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="If no devices are listed please pair your device in Android settings"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="GPS precision: Please wait..."
+        android:background="#666"
+        android:textColor="#fff"
+        android:paddingLeft="5dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

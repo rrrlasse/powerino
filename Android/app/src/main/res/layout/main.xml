@@ -63,7 +63,7 @@
 
 
     <TextView
-        android:id="@+id/textView_speed"
+        android:id="@+id/textView_rpm"
         android:layout_width="wrap_content"
         android:layout_height="50sp"
         android:layout_alignRight="@+id/space"
@@ -75,8 +75,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/space"
-        android:layout_below="@+id/textView_speed"
-        android:text="km/h" />
+        android:layout_below="@+id/textView_rpm"
+        android:text="RPM" />
 
     <TextView
         android:id="@+id/textView_kcal"
