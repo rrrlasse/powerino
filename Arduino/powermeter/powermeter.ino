@@ -15,6 +15,9 @@ const int btrate = 9600;
 //const int btrate = 38400;
 
 bool debug = false;
+
+// If the Android app fails to connect to the Powerino, try and set command_mode = false. But
+// only do so if you have problems.
 bool command_mode = true;
 
 // Power usage when supplied with 3.6 V: 38 mA with these settings. 
